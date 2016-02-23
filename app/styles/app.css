@@ -1,0 +1,22 @@
+body {
+  background: #f5f5f5;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+}
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: "Oxygen", Arial, "sans-serif";
+}
+.navbar {
+  border-bottom: 1px solid #e9eaea;
+}
+section {
+  padding-bottom: 50px;
+  border-bottom: 1px solid #939597;
+  margin-bottom: 50px;
+}
+thead {
+  border-bottom: 3px solid #939597;
+}

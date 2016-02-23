@@ -1,1 +1,3 @@
-# web-whitepages.test-source
+# Frontend Challenge
+
+Frontend challenge for Whitepages.com.

@@ -20,7 +20,7 @@ gulp.task('coffee', function() {
 });
 
 gulp.task('js', function () {
-    gulp.src(['app/scripts/app.js', 'app/scripts/**/*.js'])
+    gulp.src(['app/scripts/router.js', 'app/scripts/**/*.js'])
         .pipe(concat('app/app.js'))
         .pipe(ngAnnotate())
 //        .pipe(uglify())
@@ -28,7 +28,7 @@ gulp.task('js', function () {
 });
 
 gulp.task('default', ['coffee', 'js', 'less'], function () {
-    gulp.watch('app/scripts/*.coffee', ['coffee'])
-    gulp.watch('app/scripts/*.js', ['js'])
+    gulp.watch('app/scripts/**/*.coffee', ['coffee'])
+    gulp.watch('app/scripts/**/*.js', ['js'])
     gulp.watch('app/styles/*.less', ['less'])
 });

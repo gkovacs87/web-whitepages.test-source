@@ -2,31 +2,6 @@
 (function() {
 
   /*
-   * @name Router
-   * @desc Handles the routing of the application
-   */
-  var Router;
-  Router = function($routeProvider) {
-    return $routeProvider.when('/phone', {
-      templateUrl: 'templates/phone.html',
-      controller: 'PhoneController as vm'
-    }).when('/identity', {
-      templateUrl: 'templates/identity.html',
-      controller: 'IdentityController as vm'
-    }).when('/reputation', {
-      templateUrl: 'templates/reputation.html',
-      controller: 'ReputationController as vm'
-    }).otherwise({
-      redirectTo: '/identity'
-    });
-  };
-  return angular.module('app', ['ngRoute', 'ui.bootstrap', 'ui.bootstrap.tpls']).config(Router);
-})();
-
-'use strict';
-(function() {
-
-  /*
    * @name ApiConfig
    * @desc It stores information about the different Whitepages PRO API calls
    */
@@ -214,68 +189,4 @@
     ]
   };
   return angular.module('app').constant('ApiConfig', ApiConfig);
-})();
-
-
-'use strict';
-(function() {
-
-  /*
-   * @name PhoneController
-   * @desc Controller to handle Phone API Services
-   */
-  var PhoneController;
-  PhoneController = function(ApiConfig, Settings, $httpParamSerializer) {
-
-    /*
-     * @name initialize
-     * @desc Initialize PhoneController
-     */
-    this.initialize = (function(_this) {
-      return function() {
-        var i, len, ref, results, solution;
-        _this.config = ApiConfig['phone_solutions'];
-        _this.settings = Settings;
-        ref = _this.config;
-        results = [];
-        for (i = 0, len = ref.length; i < len; i++) {
-          solution = ref[i];
-          solution.httpParams = {
-            api_key: Settings.apiKey
-          };
-          results.push(solution.queryString = $httpParamSerializer(solution.httpParams));
-        }
-        return results;
-      };
-    })(this);
-
-    /*
-     * @name updateQueryString
-     * @desc Updates the query string when the input changed
-     */
-    this.updateQueryString = (function(_this) {
-      return function(solution) {
-        return solution.queryString = $httpParamSerializer(solution.httpParams);
-      };
-    })(this);
-    this.initialize();
-  };
-  PhoneController.$inject = ['ApiConfig', 'Settings', '$httpParamSerializer'];
-  return angular.module('app').controller('PhoneController', PhoneController);
-})();
-
-(function() {
-
-  /*
-   * @name Settings
-   * @desc Handles the application settings like api keys, urls
-   */
-  var Settings;
-  Settings = function() {
-    return {
-      apiKey: "23434",
-      baseUrl: "https://proapi.whitepages.com"
-    };
-  };
-  return angular.module('app').factory('Settings', Settings);
 })();

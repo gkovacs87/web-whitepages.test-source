@@ -6,7 +6,7 @@
    * @desc Controller to handle Phone API Services
    */
   var PhoneController;
-  PhoneController = function(ApiConfig, Settings, IPService, $httpParamSerializerJQLike) {
+  PhoneController = function(ApiConfig, Settings, $httpParamSerializerJQLike) {
 
     /*
      * @name initialize
@@ -47,21 +47,8 @@
         return solution.queryString = $httpParamSerializerJQLike(solution.httpParams);
       };
     })(this);
-    this.onBlur = (function(_this) {
-      return function(field, phoneSolution) {
-        var ipValue;
-        if (field.format !== "ip") {
-          return;
-        }
-        ipValue = phoneSolution.httpParams[field.name];
-        console.log("on blur", field, ipValue);
-        return IPService.lookup(ipValue, function(data) {
-          return console.log("lookup done", data);
-        });
-      };
-    })(this);
     this.initialize();
   };
-  PhoneController.$inject = ['ApiConfig', 'Settings', 'IPService', '$httpParamSerializerJQLike'];
+  PhoneController.$inject = ['ApiConfig', 'Settings', '$httpParamSerializerJQLike'];
   return angular.module('app').controller('PhoneController', PhoneController);
 })();

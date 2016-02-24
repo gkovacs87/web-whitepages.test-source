@@ -1,0 +1,40 @@
+<div class="container">
+    <h2>Identity Solutions</h2>
+
+    <uib-accordion>
+        <uib-accordion-group heading="{{identitySolution.name}}" ng-repeat="identitySolution in vm.config" is-open="$first">
+            <p>{{identitySolution.description}}</p>
+            <hr/>
+            <form novalidate class="simple-form" name="vm.{{identitySolution.id}}">
+                <table class="table">
+                    <thead>
+                    <th>Key</th>
+                    <th>Value</th>
+                    </thead>
+                    <tr ng-repeat="field in identitySolution.fields">
+                        <td class="col-sm-3">{{field.title}}<span class="required" ng-show="field.required"> *</span></td>
+                        <td class="col-sm-3">
+                            <input type="text" name="{{field.name}}" placeholder="{{field.placeholder}}" ng-model="identitySolution.httpParams[field.name]" ng-blur="vm.onBlur(field, identitySolution)" ng-pattern="field.pattern" ng-change="vm.updateQueryString(identitySolution)" tabindex="{{field.idx}}" ng-required="field.required"/>
+                            <span style="color:maroon" ng-show="vm.{{identitySolution.id}}.{{field.name}}.$dirty && vm.{{identitySolution.id}}.{{field.name}}.$invalid">
+                                <span ng-show="vm.{{identitySolution.id}}.{{field.name}}.$error.required">Field is required.</span>
+                                <span ng-show="vm.{{identitySolution.id}}.{{field.name}}.$error.pattern">Incorrect format.</span>
+                            </span>
+                            <div class="spinner" ng-show="field.format == 'ip' && vm.loadingVisible">
+                                <div class="bounce1"></div>
+                                <div class="bounce2"></div>
+                                <div class="bounce3"></div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+            <hr/>
+            <label>Whitepages PRO API URL</label>
+            <div class="well well-sm">
+                <div ng-show="vm.{{identitySolution.id}}.$valid">
+                    {{vm.settings.baseUrl}}/{{identitySolution.versionNumber}}/{{identitySolution.endpoint}}?{{identitySolution.queryString}}
+                </div>
+            </div>
+        </uib-accordion-group>
+    </uib-accordion>
+</div>

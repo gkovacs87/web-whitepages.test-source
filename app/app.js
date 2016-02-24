@@ -2,11 +2,12 @@
 (function() {
 
   /*
-   * @name Router
-   * @desc Handles the routing of the application
+   * @name AppConfig
+   * @desc Handles the Routing and LocalStorage Settings
    */
-  var Router;
-  Router = function($routeProvider) {
+  var AppConfig;
+  AppConfig = function($routeProvider, localStorageServiceProvider) {
+    localStorageServiceProvider.setPrefix("whitepages_test");
     return $routeProvider.when('/phone', {
       templateUrl: 'templates/phone.html',
       controller: 'PhoneController as vm'
@@ -16,11 +17,15 @@
     }).when('/reputation', {
       templateUrl: 'templates/reputation.html',
       controller: 'ReputationController as vm'
+    }).when('/settings', {
+      templateUrl: 'templates/settings.html',
+      controller: 'SettingsController as vm'
     }).otherwise({
-      redirectTo: '/identity'
+      redirectTo: '/phone'
     });
   };
-  return angular.module('app', ['ngRoute', 'ui.bootstrap', 'ui.bootstrap.tpls']).config(Router);
+  AppConfig.$inject = ['$routeProvider', 'localStorageServiceProvider'];
+  return angular.module('app', ['ngRoute', 'ui.bootstrap', 'ui.bootstrap.tpls', 'LocalStorageModule']).config(AppConfig);
 })();
 
 'use strict';

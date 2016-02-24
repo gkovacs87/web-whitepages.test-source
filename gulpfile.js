@@ -20,7 +20,7 @@ gulp.task('coffee', function() {
 });
 
 gulp.task('js', function () {
-    gulp.src(['app/scripts/router.js', 'app/scripts/**/*.js'])
+    gulp.src(['app/scripts/appconfig.js', 'app/scripts/**/*.js'])
         .pipe(concat('app/app.js'))
         .pipe(ngAnnotate())
 //        .pipe(uglify())

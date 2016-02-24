@@ -5,7 +5,7 @@
   # @name PhoneController
   # @desc Controller to handle Phone API Services
   ###
-  PhoneController = (ApiConfig, Settings, $httpParamSerializer)->
+  PhoneController = (ApiConfig, Settings, $httpParamSerializerJQLike)->
 
     ###
     # @name initialize
@@ -19,20 +19,26 @@
       #Set initial value to the queryString and httpParams values
       for solution in @config
         solution.httpParams = {api_key:Settings.apiKey}
-        solution.queryString = $httpParamSerializer(solution.httpParams)
+        solution.queryString = $httpParamSerializerJQLike(solution.httpParams)
 
     ###
     # @name updateQueryString
     # @desc Updates the query string when the input changed
+    # @param {Object} solution The Identity solution which should be updated
     ###
     @updateQueryString = (solution)=>
-      solution.queryString = $httpParamSerializer(solution.httpParams)
+      # Remove empty parameters
+      for param, paramValue of solution.httpParams
+        if paramValue is ""
+          delete solution.httpParams[param]
+
+      solution.queryString = $httpParamSerializerJQLike(solution.httpParams)
 
     @initialize()
     return
 
   PhoneController
-    .$inject = ['ApiConfig', 'Settings', '$httpParamSerializer']
+    .$inject = ['ApiConfig', 'Settings', '$httpParamSerializerJQLike']
 
   angular
     .module('app')

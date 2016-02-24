@@ -6,7 +6,7 @@
    * @desc Controller to handle Phone API Services
    */
   var PhoneController;
-  PhoneController = function(ApiConfig, Settings, $httpParamSerializer) {
+  PhoneController = function(ApiConfig, Settings, $httpParamSerializerJQLike) {
 
     /*
      * @name initialize
@@ -24,7 +24,7 @@
           solution.httpParams = {
             api_key: Settings.apiKey
           };
-          results.push(solution.queryString = $httpParamSerializer(solution.httpParams));
+          results.push(solution.queryString = $httpParamSerializerJQLike(solution.httpParams));
         }
         return results;
       };
@@ -33,14 +33,23 @@
     /*
      * @name updateQueryString
      * @desc Updates the query string when the input changed
+     * @param {Object} solution The Identity solution which should be updated
      */
     this.updateQueryString = (function(_this) {
       return function(solution) {
-        return solution.queryString = $httpParamSerializer(solution.httpParams);
+        var param, paramValue, ref;
+        ref = solution.httpParams;
+        for (param in ref) {
+          paramValue = ref[param];
+          if (paramValue === "") {
+            delete solution.httpParams[param];
+          }
+        }
+        return solution.queryString = $httpParamSerializerJQLike(solution.httpParams);
       };
     })(this);
     this.initialize();
   };
-  PhoneController.$inject = ['ApiConfig', 'Settings', '$httpParamSerializer'];
+  PhoneController.$inject = ['ApiConfig', 'Settings', '$httpParamSerializerJQLike'];
   return angular.module('app').controller('PhoneController', PhoneController);
 })();

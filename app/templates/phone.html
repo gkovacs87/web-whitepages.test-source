@@ -14,7 +14,7 @@
                     <tr ng-repeat="field in phoneSolution.fields">
                         <td class="col-sm-3">{{field.title}}<span class="required" ng-show="field.required"> *</span></td>
                         <td class="col-sm-3">
-                            <input type="text" name="{{field.name}}" placeholder="{{field.placeholder}}" ng-model="phoneSolution.httpParams[field.name]" ng-blur="vm.onBlur(field, phoneSolution)" ng-pattern="field.pattern" ng-change="vm.updateQueryString(phoneSolution)" tabindex="{{field.idx}}" ng-required="field.required"/>
+                            <input type="text" name="{{field.name}}" placeholder="{{field.placeholder}}" ng-model="phoneSolution.httpParams[field.name]" ng-pattern="field.pattern" ng-change="vm.updateQueryString(phoneSolution)" tabindex="{{field.idx}}" ng-required="field.required"/>
                             <span style="color:maroon" ng-show="{{phoneSolution.id}}.{{field.name}}.$dirty && {{phoneSolution.id}}.{{field.name}}.$invalid">
                                 <span ng-show="{{phoneSolution.id}}.{{field.name}}.$error.required">Field is required.</span>
                                 <span ng-show="{{phoneSolution.id}}.{{field.name}}.$error.pattern">Incorrect format.</span>

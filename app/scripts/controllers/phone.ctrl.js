@@ -33,6 +33,7 @@
     /*
      * @name updateQueryString
      * @desc Updates the query string when the input changed
+     * @param {Object} solution The Identity solution which should be updated
      */
     this.updateQueryString = (function(_this) {
       return function(solution) {

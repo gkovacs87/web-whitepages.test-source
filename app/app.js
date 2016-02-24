@@ -242,7 +242,7 @@
    * @desc Controller to handle Phone API Services
    */
   var PhoneController;
-  PhoneController = function(ApiConfig, Settings, IPService, $httpParamSerializerJQLike) {
+  PhoneController = function(ApiConfig, Settings, $httpParamSerializerJQLike) {
 
     /*
      * @name initialize
@@ -283,23 +283,47 @@
         return solution.queryString = $httpParamSerializerJQLike(solution.httpParams);
       };
     })(this);
-    this.onBlur = (function(_this) {
-      return function(field, phoneSolution) {
-        var ipValue;
-        if (field.format !== "ip") {
-          return;
-        }
-        ipValue = phoneSolution.httpParams[field.name];
-        console.log("on blur", field, ipValue);
-        return IPService.lookup(ipValue, function(data) {
-          return console.log("lookup done", data);
-        });
+    this.initialize();
+  };
+  PhoneController.$inject = ['ApiConfig', 'Settings', '$httpParamSerializerJQLike'];
+  return angular.module('app').controller('PhoneController', PhoneController);
+})();
+
+'use strict';
+(function() {
+
+  /*
+   * @name SettingsController
+   * @desc Controller of the Settings page
+   */
+  var SettingsController;
+  SettingsController = function(Settings) {
+
+    /*
+     * @name initialize
+     * @desc Initialize SettingsController
+     */
+    this.initialize = (function(_this) {
+      return function() {
+        _this.timeout = Settings.timeout;
+        return _this.apiKeys = Settings.apiKeys;
+      };
+    })(this);
+
+    /*
+     * @name save
+     * @desc Save the settings values to local storage
+     */
+    this.save = (function(_this) {
+      return function() {
+        Settings.saveTimeout(_this.timeout);
+        return Settings.saveApiKeys(_this.apiKeys);
       };
     })(this);
     this.initialize();
   };
-  PhoneController.$inject = ['ApiConfig', 'Settings', 'IPService', '$httpParamSerializerJQLike'];
-  return angular.module('app').controller('PhoneController', PhoneController);
+  SettingsController.$inject = ['Settings'];
+  return angular.module('app').controller('SettingsController', SettingsController);
 })();
 
 (function() {
@@ -309,11 +333,46 @@
    * @desc Handles the application settings like api keys, urls
    */
   var Settings;
-  Settings = function() {
+  Settings = function(ApiConfig, localStorageService) {
+    var api, apiKeys, i, key, len, supportedAPI, timeout, value;
+    timeout = localStorageService.get("timeout");
+    if (timeout == null) {
+      timeout = 5000;
+      localStorageService.set("timeout", timeout);
+    }
+    apiKeys = localStorageService.get("apikeys");
+    if (apiKeys == null) {
+      supportedAPI = [];
+      for (key in ApiConfig) {
+        value = ApiConfig[key];
+        for (i = 0, len = value.length; i < len; i++) {
+          api = value[i];
+          supportedAPI.push({
+            id: api.id,
+            name: api.name,
+            key: ""
+          });
+        }
+      }
+      localStorageService.set("apikeys", supportedAPI);
+      apiKeys = supportedAPI;
+    }
     return {
-      apiKey: "23434",
-      baseUrl: "https://proapi.whitepages.com"
+      apiKeys: apiKeys,
+      timeout: timeout,
+      baseUrl: "https://proapi.whitepages.com",
+      saveTimeout: (function(_this) {
+        return function(timeout) {
+          return localStorageService.set("timeout", timeout);
+        };
+      })(this),
+      saveApiKeys: (function(_this) {
+        return function(apiKeys) {
+          return localStorageService.set("apikeys", apiKeys);
+        };
+      })(this)
     };
   };
+  Settings.$inject = ['ApiConfig', 'localStorageService'];
   return angular.module('app').factory('Settings', Settings);
 })();

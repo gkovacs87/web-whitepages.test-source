@@ -13,13 +13,14 @@ h5 {
   border-bottom: 1px solid #e9eaea;
 }
 section {
-  padding-bottom: 50px;
-  border-bottom: 1px solid #939597;
-  margin-bottom: 50px;
+  padding-bottom: 30px;
 }
 thead {
   border-bottom: 3px solid #939597;
 }
 table .required {
   color: maroon;
+}
+#settingsContainer .centered-section {
+  text-align: center;
 }

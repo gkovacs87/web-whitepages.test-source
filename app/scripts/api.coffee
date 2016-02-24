@@ -8,47 +8,51 @@
   ApiConfig = {
     "phone_solutions": [
       {
+        "id": "phone_reputation",
         "name": "Phone Reputation",
         "description": "The Phone Reputation response provides details on spam/risk behaviors the phone number is associated with. Using a RESTful GET request, you’ll receive reputation level and details including what spam, scams and fraud activities are associated with the phone number. You can find more details about Phone Reputation here. For more details on the phone, use the Phone Intelligence or Caller Identification or premium Reverse Phone response to get phone metadata and who is calling in and from where.",
-        "versionNumber": "2.1"
-        "endpoint": "phone.json"
+        "versionNumber": "2.1",
+        "endpoint": "phone.json",
         "fields": [
-          {"name": "api_key", "title": "API Key", "format":"text", "placeholder": "KEYVAL", "required": true, "idx": 0},
-          {"name": "phone_number", "title": "Phone number", "format":"text", "placeholder": "2069735184", "required": true, "idx": 1},
-          {"name": "country_hint", "title": "Country hint", "format":"text", "placeholder": "US", "required": false, "idx": 2}
+          {"name": "api_key", "title": "API Key", "format":"text", "placeholder": "KEYVAL", "required": true, "idx": 1},
+          {"name": "phone_number", "title": "Phone number", "format":"text", "placeholder": "2069735184", "pattern":/^\+?[0-9]{3}-?[0-9-]{6,12}$/, "required": true, "idx": 2},
+          {"name": "country_hint", "title": "Country hint", "format":"text", "placeholder": "US", "pattern":/^[A-Za-z][A-Za-z]$/, "required": false, "idx": 3}
         ]
       },
       {
+        "id": "phone_intelligence",
         "name": "Phone Intelligence",
         "description": "Phone Intelligence request provides the metadata on a phone number. Using a RESTful GET request, you’ll receive phone attributes such as Is Valid, Country Code, Is Prepaid, Line Type, Carrier, Is Connected and more for the requested phone number. You can find more details about Phone Intelligence here. For more details on the phone, use the Phone Reputation or Caller Identification or premium Reverse Phone response to get phone reputation and who is calling in and from where.",
-        "versionNumber": "2.1"
-        "endpoint": "phone.json"
+        "versionNumber": "2.1",
+        "endpoint": "phone.json",
         "fields": [
-          {"name": "api_key", "title": "API Key", "format":"text", "placeholder": "KEYVAL", "required": true, "idx": 0},
-          {"name": "phone_number", "title": "Phone number", "format":"text", "placeholder": "2069735184", "required": true, "idx": 1},
-          {"name": "country_hint", "title": "Country hint", "format":"text", "placeholder": "US", "required": false, "idx": 2}
+          {"name": "api_key", "title": "API Key", "format":"text", "placeholder": "KEYVAL", "required": true, "idx": 1},
+          {"name": "phone_number", "title": "Phone number", "format":"text", "placeholder": "2069735184", "pattern":/^\+?[0-9]{3}-?[0-9-]{6,12}$/, "required": true, "idx": 2},
+          {"name": "country_hint", "title": "Country hint", "format":"text", "placeholder": "US", "pattern":/^[A-Za-z][A-Za-z]$/, "required": false, "idx": 3}
         ]
       },
       {
+        "id": "caller_name",
         "name": "Caller Name",
         "description": "Caller Name request allows to get the person or business associated with the incoming caller. When you use a RESTful GET request with your API key, you’ll receive the best person or business subscribed to the incoming call number. For a more detailed response including location or the household members associated with the phone, use the Caller Identification or Reverse Phone response.",
-        "versionNumber": "2.1"
-        "endpoint": "phone.json"
+        "versionNumber": "2.1",
+        "endpoint": "phone.json",
         "fields": [
-          {"name": "api_key", "title": "API Key", "format":"text", "placeholder": "KEYVAL", "required": true, "idx": 0},
-          {"name": "phone_number", "title": "Phone number", "format":"text", "placeholder": "2069735184", "required": true, "idx": 1},
-          {"name": "country_hint", "title": "Country hint", "format":"text", "placeholder": "US", "required": false, "idx": 2}
+          {"name": "api_key", "title": "API Key", "format":"text", "placeholder": "KEYVAL", "required": true, "idx": 1},
+          {"name": "phone_number", "title": "Phone number", "format":"text", "placeholder": "2069735184", "pattern":/^\+?[0-9]{3}-?[0-9-]{6,12}$/, "required": true, "idx": 2},
+          {"name": "country_hint", "title": "Country hint", "format":"text", "placeholder": "US", "pattern":/^[A-Za-z][A-Za-z]$/, "required": false, "idx": 3}
         ]
       },
       {
+        "id": "caller_identification",
         "name": "Caller Identification",
         "description": "Caller Identification request allows to get a single name and location for incoming caller. When you use a RESTful GET request with your API key, you’ll receive a comprehensive overview of the incoming caller, including phone intelligence, the incoming caller’s name and where the call originated. For a more detailed response including all the people associated with phone and their respective locations, use the Reverse Phone response.",
-        "versionNumber": "2.1"
-        "endpoint": "phone.json"
+        "versionNumber": "2.1",
+        "endpoint": "phone.json",
         "fields": [
-          {"name": "api_key", "title": "API Key", "format":"text", "placeholder": "KEYVAL", "required": true, "idx": 0},
-          {"name": "phone_number", "title": "Phone number", "format":"text", "placeholder": "2069735184", "required": true, "idx": 1},
-          {"name": "country_hint", "title": "Country hint", "format":"text", "placeholder": "US", "required": false, "idx": 2}
+          {"name": "api_key", "title": "API Key", "format":"text", "placeholder": "KEYVAL", "required": true, "idx": 1},
+          {"name": "phone_number", "title": "Phone number", "format":"text", "placeholder": "2069735184", "pattern":/^\+?[0-9]{3}-?[0-9-]{6,12}$/, "required": true, "idx": 2},
+          {"name": "country_hint", "title": "Country hint", "format":"text", "placeholder": "US", "pattern":/^[A-Za-z][A-Za-z]$/, "required": false, "idx": 3}
         ]
       }
     ],

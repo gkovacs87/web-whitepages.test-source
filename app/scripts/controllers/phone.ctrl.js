@@ -14,16 +14,29 @@
      */
     this.initialize = (function(_this) {
       return function() {
-        var i, len, ref, results, solution;
+        var apiKey, field, i, j, len, len1, ref, ref1, results, solution;
         _this.config = ApiConfig['phone_solutions'];
         _this.settings = Settings;
         ref = _this.config;
         results = [];
         for (i = 0, len = ref.length; i < len; i++) {
           solution = ref[i];
-          solution.httpParams = {
-            api_key: Settings.apiKey
-          };
+          apiKey = Settings.apiKeys.filter(function(apiKey) {
+            return apiKey.id === solution.id;
+          });
+          if (apiKey.length > 0 && apiKey[0].key.length > 0) {
+            solution.httpParams = {
+              api_key: apiKey[0].key
+            };
+          } else {
+            solution.httpParams = {};
+          }
+          ref1 = solution.fields;
+          for (j = 0, len1 = ref1.length; j < len1; j++) {
+            field = ref1[j];
+            field.id = field.name.replace(".", "_");
+          }
+          solution.base_endpoint = solution.endpoint;
           results.push(solution.queryString = $httpParamSerializerJQLike(solution.httpParams));
         }
         return results;

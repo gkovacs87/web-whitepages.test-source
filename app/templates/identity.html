@@ -14,10 +14,10 @@
                     <tr ng-repeat="field in identitySolution.fields">
                         <td class="col-sm-3">{{field.title}}<span class="required" ng-show="field.required"> *</span></td>
                         <td class="col-sm-3">
-                            <input type="text" name="{{field.name}}" placeholder="{{field.placeholder}}" ng-model="identitySolution.httpParams[field.name]" ng-blur="vm.onBlur(field, identitySolution)" ng-pattern="field.pattern" ng-change="vm.updateQueryString(identitySolution)" tabindex="{{field.idx}}" ng-required="field.required"/>
-                            <span style="color:maroon" ng-show="vm.{{identitySolution.id}}.{{field.name}}.$dirty && vm.{{identitySolution.id}}.{{field.name}}.$invalid">
-                                <span ng-show="vm.{{identitySolution.id}}.{{field.name}}.$error.required">Field is required.</span>
-                                <span ng-show="vm.{{identitySolution.id}}.{{field.name}}.$error.pattern">Incorrect format.</span>
+                            <input type="text" name="{{field.id}}" placeholder="{{field.placeholder}}" ng-model="identitySolution.httpParams[field.name]" ng-blur="vm.onBlur(field, identitySolution)" ng-pattern="field.pattern" ng-change="vm.updateQueryString(field, identitySolution)" tabindex="{{field.idx}}" ng-required="field.required"/>
+                            <span style="color:maroon" ng-show="vm.{{identitySolution.id}}.{{field.id}}.$dirty && vm.{{identitySolution.id}}.{{field.id}}.$invalid">
+                                <span ng-show="vm.{{identitySolution.id}}.{{field.id}}.$error.required">Field is required.</span>
+                                <span ng-show="vm.{{identitySolution.id}}.{{field.id}}.$error.pattern">Incorrect format.</span>
                             </span>
                             <div class="spinner" ng-show="field.format == 'ip' && vm.loadingVisible">
                                 <div class="bounce1"></div>

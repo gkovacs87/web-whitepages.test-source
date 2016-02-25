@@ -66,8 +66,8 @@
         "endpoint": "phone.json",
         "fields": [
           {"name": "api_key", "title": "API Key", "format":"text", "placeholder": "KEYVAL", "required": true, "idx": 1},
-          {"name": "phone_number", "title": "Phone number", "format":"text", "placeholder": "2069735184", "required": true, "idx": 2},
-          {"name": "response_type", "title": "Response type", "format":"text", "placeholder": "US", "required": false, "idx": 3}
+          {"name": "phone_number", "title": "Phone number", "format":"text", "placeholder": "2069735184", "pattern":/^\+?[0-9]{3}-?[0-9-]{6,12}$/, "required": true, "idx": 2},
+          {"name": "response_type", "title": "Response type", "format":"text", "placeholder": "lite or callerid", "pattern":/(lite|callerid)/, "required": false, "idx": 3}
         ]
       },
       {
@@ -91,10 +91,10 @@
           {"name": "city", "title": "City", "format":"text", "placeholder": "Seattle", "required": false, "idx": 10},
           {"name": "postal_code", "title": "Postal code", "format":"text", "placeholder": "92019", "required": false, "idx": 11},
 
-          {"name": "state_code", "title": "State code", "format":"text", "placeholder": "WA", "required": false, "idx": 12},
-          {"name": "country_code", "title": "Country code", "format":"text", "placeholder": "CA or US", "required": false, "idx": 13},
-          {"name": "use_historical", "title": "Use historical address", "format":"text", "placeholder": "true", "required": false, "idx": 14},
-          {"name": "use_metro", "title": "Expend search to metro area", "format":"text", "placeholder": "true", "required": false, "idx": 15}
+          {"name": "state_code", "title": "State code", "format":"text", "placeholder": "WA", "pattern":/^[A-Za-z][A-Za-z]$/, "required": false, "idx": 12},
+          {"name": "country_code", "title": "Country code", "format":"text", "placeholder": "CA", "pattern":/^[A-Za-z][A-Za-z]$/, "required": false, "idx": 13},
+          {"name": "use_historical", "title": "Use historical address", "format":"text", "placeholder": "true", "pattern":/(true|false)/, "required": false, "idx": 14},
+          {"name": "use_metro", "title": "Expend search to metro area", "format":"text", "placeholder": "true", "pattern":/(true|false)/, "required": false, "idx": 15}
         ]
       },
       {
@@ -109,8 +109,8 @@
           {"name": "street_line_2", "title": "Apartment", "format":"text", "placeholder": "Apt 265, Box 34Rs", "required": false, "idx": 3},
           {"name": "city", "title": "City", "format":"text", "placeholder": "Seattle", "required": false, "idx": 4},
           {"name": "postal_code", "title": "Postal code", "format":"text", "placeholder": "92019", "required": false, "idx": 5},
-          {"name": "state_code", "title": "State code", "format":"text", "placeholder": "WA", "required": false, "idx": 6},
-          {"name": "country_code", "title": "Country code", "format":"text", "placeholder": "CA or US", "required": false, "idx": 7},
+          {"name": "state_code", "title": "State code", "format":"text", "placeholder": "WA", "pattern":/^[A-Za-z][A-Za-z]$/, "required": false, "idx": 6},
+          {"name": "country_code", "title": "Country code", "format":"text", "placeholder": "CA", "pattern":/^[A-Za-z][A-Za-z]$/, "required": false, "idx": 7},
         ]
       },
       {
@@ -126,8 +126,8 @@
           {"name": "street_line_2", "title": "Apartment", "format":"text", "placeholder": "Apt 265, Box 34Rs", "required": false, "idx": 4},
           {"name": "city", "title": "City", "format":"text", "placeholder": "Seattle", "required": false, "idx": 5},
           {"name": "postal_code", "title": "Postal code", "format":"text", "placeholder": "92019", "required": false, "idx": 6},
-          {"name": "state_code", "title": "State code", "format":"text", "placeholder": "WA", "required": false, "idx": 7},
-          {"name": "country_code", "title": "Country code", "format":"text", "placeholder": "CA or US", "required": false, "idx": 8},
+          {"name": "state_code", "title": "State code", "format":"text", "placeholder": "WA", "pattern":/^[A-Za-z][A-Za-z]$/, "required": false, "idx": 7},
+          {"name": "country_code", "title": "Country code", "format":"text", "placeholder": "CA", "pattern":/^[A-Za-z][A-Za-z]$/, "required": false, "idx": 8},
         ]
       },
       {
@@ -138,7 +138,7 @@
         "endpoint": "entity/%ID%.json",
         "fields": [
           {"name": "api_key", "title": "API Key", "format":"text", "placeholder": "KEYVAL", "required": true, "idx": 1},
-          {"name": "entity_ID", "title": "Entity ID", "format":"text", "placeholder": "entity id", "required": true, param: true, "idx": 2},
+          {"name": "entity_ID", "title": "Entity ID", "format":"text", "placeholder": "entity id", "required": true, pathParam: true, pathPlaceholder:"%ID%", "idx": 2},
         ]
       },
       {
@@ -163,8 +163,8 @@
 
           {"name": "address.city", "title": "City", "format":"text", "placeholder": "Seattle", "required": false, "idx": 11},
           {"name": "address.postal_code", "title": "Postal code", "format":"text", "placeholder": "92019", "required": false, "idx": 12},
-          {"name": "address.state_code", "title": "State code", "format":"text", "placeholder": "WA", "required": false, "idx": 13},
-          {"name": "address.country_code", "title": "Country code", "format":"text", "placeholder": "CA or US", "required": false, "idx": 14},
+          {"name": "address.state_code", "title": "State code", "format":"text", "placeholder": "WA", "pattern": /^[A-Za-z][A-Za-z]$/, "required": false, "idx": 13},
+          {"name": "address.country_code", "title": "Country code", "format":"text", "placeholder": "US", "pattern": /^[A-Za-z][A-Za-z]$/, "required": false, "idx": 14},
 
           {"name": "shipping.firstname", "title": "Shipping first name", "format":"text", "placeholder": "Albert", "required": false, "idx": 15},
           {"name": "shipping.lastname", "title": "Shipping last name", "format":"text", "placeholder": "Foster", "required": false, "idx": 16},
@@ -173,15 +173,15 @@
           {"name": "billing.street_line_2", "title": "Billing address apartment", "format":"text", "placeholder": "Apt 265, Box 34Rs", "required": false, "idx": 18},
           {"name": "billing.city", "title": "Billing City", "format":"text", "placeholder": "Seattle", "required": false, "idx": 19},
           {"name": "billing.postal_code", "title": "Billing Postal code", "format":"text", "placeholder": "92019", "required": false, "idx": 20},
-          {"name": "billing.state_code", "title": "Billing State code", "format":"text", "placeholder": "WA", "required": false, "idx": 21},
-          {"name": "billing.country_code", "title": "Billing Country code", "format":"text", "placeholder": "CA or US", "required": false, "idx": 22},
+          {"name": "billing.state_code", "title": "Billing State code", "format":"text", "placeholder": "WA", "pattern": /^[A-Za-z][A-Za-z]$/, "required": false, "idx": 21},
+          {"name": "billing.country_code", "title": "Billing Country code", "format":"text", "placeholder": "CA", "pattern": /^[A-Za-z][A-Za-z]$/, "required": false, "idx": 22},
 
           {"name": "shipping.street_line_1", "title": "Shipping address number and street name", "format":"text", "placeholder": "2808 Nero Blvd", "required": false, "idx": 23},
           {"name": "shipping.street_line_2", "title": "Shipping address apartment", "format":"text", "placeholder": "Apt 265, Box 34Rs", "required": false, "idx": 24},
           {"name": "shipping.city", "title": "Shipping City", "format":"text", "placeholder": "Seattle", "required": false, "idx": 25},
           {"name": "shipping.postal_code", "title": "Shipping Postal code", "format":"text", "placeholder": "92019", "required": false, "idx": 26},
-          {"name": "shipping.state_code", "title": "Shipping State code", "format":"text", "placeholder": "WA", "required": false, "idx": 27},
-          {"name": "shipping.country_code", "title": "Shipping Country code", "format":"text", "placeholder": "CA or US", "required": false, "idx": 28},
+          {"name": "shipping.state_code", "title": "Shipping State code", "format":"text", "placeholder": "WA", "pattern": /^[A-Za-z][A-Za-z]$/, "required": false, "idx": 27},
+          {"name": "shipping.country_code", "title": "Shipping Country code", "format":"text", "placeholder": "US", "pattern": /^[A-Za-z][A-Za-z]$/, "required": false, "idx": 28},
 
           {"name": "number", "title": "Phone number", "format":"text", "placeholder": "2069735184", "pattern":/^\+?[0-9]{3}-?[0-9-]{6,12}$/, "required": false, "idx": 29},
           {"name": "billing_number", "title": "Billing Phone number", "format":"text", "placeholder": "2069735184", "pattern":/^\+?[0-9]{3}-?[0-9-]{6,12}$/, "required": false, "idx": 30},

@@ -21,7 +21,6 @@
       })
       .when('/reputation', {
         templateUrl: 'templates/reputation.html'
-        controller: 'ReputationController as vm'
       })
       .when('/settings', {
         templateUrl: 'templates/settings.html'

@@ -18,7 +18,21 @@
 
       #Set initial value to the queryString and httpParams values
       for solution in @config
-        solution.httpParams = {api_key:Settings.apiKey}
+
+        #Load API key from settings if set
+        apiKey = Settings.apiKeys.filter (apiKey)=>
+          return apiKey.id is solution.id
+
+        if apiKey.length > 0 and apiKey[0].key.length > 0
+          solution.httpParams =
+            api_key: apiKey[0].key
+        else
+          solution.httpParams = {}
+
+        #use modified names for input names, replace . to _
+        for field in solution.fields
+          field.id = field.name.replace(".", "_")
+        solution.base_endpoint = solution.endpoint
         solution.queryString = $httpParamSerializerJQLike(solution.httpParams)
 
     ###
@@ -26,13 +40,21 @@
     # @desc Updates the query string when the input changed
     # @param {Object} solution The Identity solution which should be updated
     ###
-    @updateQueryString = (solution)=>
+    @updateQueryString = (field, solution)=>
+
       # Remove empty parameters
       for param, paramValue of solution.httpParams
         if paramValue is ""
           delete solution.httpParams[param]
 
-      solution.queryString = $httpParamSerializerJQLike(solution.httpParams)
+      # If field appears in the path, instead in the parameters, then update endpoint, and remove from params
+      if field.pathParam
+        solution.endpoint = solution.base_endpoint.replace(field.pathPlaceholder, solution.httpParams[field.name])
+        tempParams = angular.copy(solution.httpParams)
+        delete tempParams[field.name]
+        solution.queryString = $httpParamSerializerJQLike(tempParams)
+      else
+        solution.queryString = $httpParamSerializerJQLike(solution.httpParams)
 
     ###
     # @name onBlur

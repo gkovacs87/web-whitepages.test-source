@@ -15,7 +15,7 @@
       $http
         method: 'GET',
         url: "http://ipinfo.io/#{ipAddress}",
-        timeout: Settings.timeout
+        timeout: Settings.getTimeout()
       .then (response)=>
         callback(false, response)
       , (error)=>

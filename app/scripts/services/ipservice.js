@@ -17,7 +17,7 @@
       return $http({
         method: 'GET',
         url: "http://ipinfo.io/" + ipAddress,
-        timeout: Settings.timeout
+        timeout: Settings.getTimeout()
       }).then((function(_this) {
         return function(response) {
           return callback(false, response);

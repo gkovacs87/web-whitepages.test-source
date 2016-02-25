@@ -34,6 +34,8 @@
         localStorageService.set("timeout", timeout)
       saveApiKeys: (apiKeys)=>
         localStorageService.set("apikeys", apiKeys)
+      getTimeout: ()=>
+        localStorageService.get("timeout")
     }
 
   Settings

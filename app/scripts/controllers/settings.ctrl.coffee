@@ -12,7 +12,7 @@
     # @desc Initialize SettingsController
     ###
     @initialize = ()=>
-      @timeout = Settings.timeout
+      @timeout = Settings.getTimeout()
       @apiKeys = Settings.apiKeys
 
     ###

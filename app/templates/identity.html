@@ -15,14 +15,18 @@
                         <td class="col-sm-3">{{field.title}}<span class="required" ng-show="field.required"> *</span></td>
                         <td class="col-sm-3">
                             <input type="text" name="{{field.id}}" placeholder="{{field.placeholder}}" ng-model="identitySolution.httpParams[field.name]" ng-blur="vm.onBlur(field, identitySolution)" ng-pattern="field.pattern" ng-change="vm.updateQueryString(field, identitySolution)" tabindex="{{field.idx}}" ng-required="field.required"/>
-                            <span style="color:maroon" ng-show="vm.{{identitySolution.id}}.{{field.id}}.$dirty && vm.{{identitySolution.id}}.{{field.id}}.$invalid">
+                            <span style="color:maroon" ng-show="vm.{{identitySolution.id}}.{{field.id}}.$dirty && (vm.{{identitySolution.id}}.{{field.id}}.$invalid || vm.ipError)">
                                 <span ng-show="vm.{{identitySolution.id}}.{{field.id}}.$error.required">Field is required.</span>
                                 <span ng-show="vm.{{identitySolution.id}}.{{field.id}}.$error.pattern">Incorrect format.</span>
+                                <span ng-show="field.format == 'ip' && vm.ipError">IP lookup failed.</span>
                             </span>
-                            <div class="spinner" ng-show="field.format == 'ip' && vm.loadingVisible">
+                            <div class="spinner" ng-show="field.format == 'ip' && vm.loadingVisible && vm.updatedFields.length == 0 && !vm.ipError">
                                 <div class="bounce1"></div>
                                 <div class="bounce2"></div>
                                 <div class="bounce3"></div>
+                            </div>
+                            <div ng-show="field.format == 'ip' && vm.updatedFields.length > 0">
+                                Updated fields: <div ng-repeat="updatedField in vm.updatedFields">{{updatedField}}</div>
                             </div>
                         </td>
                     </tr>

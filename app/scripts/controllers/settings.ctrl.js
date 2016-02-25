@@ -14,7 +14,7 @@
      */
     this.initialize = (function(_this) {
       return function() {
-        _this.timeout = Settings.timeout;
+        _this.timeout = Settings.getTimeout();
         return _this.apiKeys = Settings.apiKeys;
       };
     })(this);

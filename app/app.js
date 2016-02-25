@@ -188,13 +188,15 @@
             "title": "Phone number",
             "format": "text",
             "placeholder": "2069735184",
+            "pattern": /^\+?[0-9]{3}-?[0-9-]{6,12}$/,
             "required": true,
             "idx": 2
           }, {
             "name": "response_type",
             "title": "Response type",
             "format": "text",
-            "placeholder": "US",
+            "placeholder": "lite or callerid",
+            "pattern": /(lite|callerid)/,
             "required": false,
             "idx": 3
           }
@@ -288,13 +290,15 @@
             "title": "State code",
             "format": "text",
             "placeholder": "WA",
+            "pattern": /^[A-Za-z][A-Za-z]$/,
             "required": false,
             "idx": 12
           }, {
             "name": "country_code",
             "title": "Country code",
             "format": "text",
-            "placeholder": "CA or US",
+            "placeholder": "CA",
+            "pattern": /^[A-Za-z][A-Za-z]$/,
             "required": false,
             "idx": 13
           }, {
@@ -302,6 +306,7 @@
             "title": "Use historical address",
             "format": "text",
             "placeholder": "true",
+            "pattern": /(true|false)/,
             "required": false,
             "idx": 14
           }, {
@@ -309,6 +314,7 @@
             "title": "Expend search to metro area",
             "format": "text",
             "placeholder": "true",
+            "pattern": /(true|false)/,
             "required": false,
             "idx": 15
           }
@@ -360,13 +366,15 @@
             "title": "State code",
             "format": "text",
             "placeholder": "WA",
+            "pattern": /^[A-Za-z][A-Za-z]$/,
             "required": false,
             "idx": 6
           }, {
             "name": "country_code",
             "title": "Country code",
             "format": "text",
-            "placeholder": "CA or US",
+            "placeholder": "CA",
+            "pattern": /^[A-Za-z][A-Za-z]$/,
             "required": false,
             "idx": 7
           }
@@ -425,13 +433,15 @@
             "title": "State code",
             "format": "text",
             "placeholder": "WA",
+            "pattern": /^[A-Za-z][A-Za-z]$/,
             "required": false,
             "idx": 7
           }, {
             "name": "country_code",
             "title": "Country code",
             "format": "text",
-            "placeholder": "CA or US",
+            "placeholder": "CA",
+            "pattern": /^[A-Za-z][A-Za-z]$/,
             "required": false,
             "idx": 8
           }
@@ -556,13 +566,15 @@
             "title": "State code",
             "format": "text",
             "placeholder": "WA",
+            "pattern": /^[A-Za-z][A-Za-z]$/,
             "required": false,
             "idx": 13
           }, {
             "name": "address.country_code",
             "title": "Country code",
             "format": "text",
-            "placeholder": "CA or US",
+            "placeholder": "US",
+            "pattern": /^[A-Za-z][A-Za-z]$/,
             "required": false,
             "idx": 14
           }, {
@@ -612,13 +624,15 @@
             "title": "Billing State code",
             "format": "text",
             "placeholder": "WA",
+            "pattern": /^[A-Za-z][A-Za-z]$/,
             "required": false,
             "idx": 21
           }, {
             "name": "billing.country_code",
             "title": "Billing Country code",
             "format": "text",
-            "placeholder": "CA or US",
+            "placeholder": "CA",
+            "pattern": /^[A-Za-z][A-Za-z]$/,
             "required": false,
             "idx": 22
           }, {
@@ -654,13 +668,15 @@
             "title": "Shipping State code",
             "format": "text",
             "placeholder": "WA",
+            "pattern": /^[A-Za-z][A-Za-z]$/,
             "required": false,
             "idx": 27
           }, {
             "name": "shipping.country_code",
             "title": "Shipping Country code",
             "format": "text",
-            "placeholder": "CA or US",
+            "placeholder": "US",
+            "pattern": /^[A-Za-z][A-Za-z]$/,
             "required": false,
             "idx": 28
           }, {
@@ -719,13 +735,18 @@
      */
     this.initialize = (function(_this) {
       return function() {
-        var i, len, ref, results, solution;
+        var field, i, j, len, len1, ref, ref1, results, solution;
         _this.config = ApiConfig['identity_solutions'];
         _this.settings = Settings;
         ref = _this.config;
         results = [];
         for (i = 0, len = ref.length; i < len; i++) {
           solution = ref[i];
+          ref1 = solution.fields;
+          for (j = 0, len1 = ref1.length; j < len1; j++) {
+            field = ref1[j];
+            field.id = field.name.replace(".", "_");
+          }
           solution.httpParams = {
             api_key: Settings.apiKey
           };

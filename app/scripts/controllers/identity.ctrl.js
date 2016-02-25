@@ -14,13 +14,18 @@
      */
     this.initialize = (function(_this) {
       return function() {
-        var i, len, ref, results, solution;
+        var field, i, j, len, len1, ref, ref1, results, solution;
         _this.config = ApiConfig['identity_solutions'];
         _this.settings = Settings;
         ref = _this.config;
         results = [];
         for (i = 0, len = ref.length; i < len; i++) {
           solution = ref[i];
+          ref1 = solution.fields;
+          for (j = 0, len1 = ref1.length; j < len1; j++) {
+            field = ref1[j];
+            field.id = field.name.replace(".", "_");
+          }
           solution.httpParams = {
             api_key: Settings.apiKey
           };

@@ -18,6 +18,8 @@
 
       #Set initial value to the queryString and httpParams values
       for solution in @config
+        for field in solution.fields
+          field.id = field.name.replace(".", "_")
         solution.httpParams = {api_key:Settings.apiKey}
         solution.queryString = $httpParamSerializerJQLike(solution.httpParams)
 

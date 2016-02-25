@@ -42,6 +42,11 @@
         return function(apiKeys) {
           return localStorageService.set("apikeys", apiKeys);
         };
+      })(this),
+      getTimeout: (function(_this) {
+        return function() {
+          return localStorageService.get("timeout");
+        };
       })(this)
     };
   };

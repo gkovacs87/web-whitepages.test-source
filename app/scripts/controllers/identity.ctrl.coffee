@@ -15,6 +15,7 @@
       #Load identity configuration, and settings
       @config = ApiConfig['identity_solutions']
       @settings = Settings
+      @updatedFields = []
 
       #Set initial value to the queryString and httpParams values
       for solution in @config
@@ -72,26 +73,30 @@
       return if ipAddress.length is 0
 
       @loadingVisible = true
+      @updatedFields = []
+      @ipError = false
       #Search for the ip address
       IPService.lookup ipAddress, (error, data)=>
         setTimeout ()=>
           @loadingVisible = false
         , 1000
         if error
-          #TODO: error handling
-          alert("ERROR")
+          @ipError = true
           return
 
         #Fill available fields
         ipInfo = data.data
         if ipInfo.city? and ipInfo.city isnt ""
           solution.httpParams['address.city'] = ipInfo.city
+          @updatedFields.push("address.city")
 
         if ipInfo.country? and ipInfo.country isnt ""
           solution.httpParams['address.country_code'] = ipInfo.country
+          @updatedFields.push("address.country_code")
 
         if ipInfo.postal? and ipInfo.postal isnt ""
           solution.httpParams['address.postal_code'] = ipInfo.postal
+          @updatedFields.push("address.postal_code")
 
 
     @initialize()

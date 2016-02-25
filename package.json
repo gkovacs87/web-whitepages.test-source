@@ -1,8 +1,8 @@
 {
   "name": "web-whitepages.test-source",
   "private": true,
-  "version": "0.3.0",
-  "description": "Whitepages front-end test",
+  "version": "0.4.0",
+  "description": "Whitepages Frontend Challenge",
   "repository": "https://github.com/gkovacs87/web-whitepages.test-source",
   "license": "MIT",
   "devDependencies": {

@@ -17,6 +17,7 @@
         var apiKey, field, i, j, len, len1, ref, ref1, results, solution;
         _this.config = ApiConfig['identity_solutions'];
         _this.settings = Settings;
+        _this.updatedFields = [];
         ref = _this.config;
         results = [];
         for (i = 0, len = ref.length; i < len; i++) {
@@ -89,24 +90,29 @@
           return;
         }
         _this.loadingVisible = true;
+        _this.updatedFields = [];
+        _this.ipError = false;
         return IPService.lookup(ipAddress, function(error, data) {
           var ipInfo;
           setTimeout(function() {
             return _this.loadingVisible = false;
           }, 1000);
           if (error) {
-            alert("ERROR");
+            _this.ipError = true;
             return;
           }
           ipInfo = data.data;
           if ((ipInfo.city != null) && ipInfo.city !== "") {
             solution.httpParams['address.city'] = ipInfo.city;
+            _this.updatedFields.push("address.city");
           }
           if ((ipInfo.country != null) && ipInfo.country !== "") {
             solution.httpParams['address.country_code'] = ipInfo.country;
+            _this.updatedFields.push("address.country_code");
           }
           if ((ipInfo.postal != null) && ipInfo.postal !== "") {
-            return solution.httpParams['address.postal_code'] = ipInfo.postal;
+            solution.httpParams['address.postal_code'] = ipInfo.postal;
+            return _this.updatedFields.push("address.postal_code");
           }
         });
       };

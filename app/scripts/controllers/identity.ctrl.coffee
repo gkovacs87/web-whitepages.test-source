@@ -18,10 +18,21 @@
 
       #Set initial value to the queryString and httpParams values
       for solution in @config
+
+        #Load API key from settings if set
+        apiKey = Settings.apiKeys.filter (apiKey)=>
+          return apiKey.id is solution.id
+
+        if apiKey.length > 0 and apiKey[0].key.length > 0
+          solution.httpParams =
+            api_key: apiKey[0].key
+        else
+          solution.httpParams = {}
+
+        #use modified names for input names, replace . to _
         for field in solution.fields
           field.id = field.name.replace(".", "_")
         solution.base_endpoint = solution.endpoint
-        solution.httpParams = {api_key:Settings.apiKey}
         solution.queryString = $httpParamSerializerJQLike(solution.httpParams)
 
     ###

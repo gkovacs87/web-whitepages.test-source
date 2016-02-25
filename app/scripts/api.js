@@ -436,7 +436,8 @@
             "format": "text",
             "placeholder": "entity id",
             "required": true,
-            param: true,
+            pathParam: true,
+            pathPlaceholder: "%ID%",
             "idx": 2
           }
         ]

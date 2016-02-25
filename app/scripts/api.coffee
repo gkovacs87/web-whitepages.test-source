@@ -138,7 +138,7 @@
         "endpoint": "entity/%ID%.json",
         "fields": [
           {"name": "api_key", "title": "API Key", "format":"text", "placeholder": "KEYVAL", "required": true, "idx": 1},
-          {"name": "entity_ID", "title": "Entity ID", "format":"text", "placeholder": "entity id", "required": true, param: true, "idx": 2},
+          {"name": "entity_ID", "title": "Entity ID", "format":"text", "placeholder": "entity id", "required": true, pathParam: true, pathPlaceholder:"%ID%", "idx": 2},
         ]
       },
       {

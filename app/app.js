@@ -466,7 +466,8 @@
             "format": "text",
             "placeholder": "entity id",
             "required": true,
-            param: true,
+            pathParam: true,
+            pathPlaceholder: "%ID%",
             "idx": 2
           }
         ]
@@ -747,6 +748,7 @@
             field = ref1[j];
             field.id = field.name.replace(".", "_");
           }
+          solution.base_endpoint = solution.endpoint;
           solution.httpParams = {
             api_key: Settings.apiKey
           };
@@ -762,8 +764,8 @@
      * @param {Object} solution The Identity solution which should be updated
      */
     this.updateQueryString = (function(_this) {
-      return function(solution) {
-        var param, paramValue, ref;
+      return function(field, solution) {
+        var param, paramValue, ref, tempParams;
         ref = solution.httpParams;
         for (param in ref) {
           paramValue = ref[param];
@@ -771,7 +773,14 @@
             delete solution.httpParams[param];
           }
         }
-        return solution.queryString = $httpParamSerializerJQLike(solution.httpParams);
+        if (field.pathParam) {
+          solution.endpoint = solution.base_endpoint.replace(field.pathPlaceholder, solution.httpParams[field.name]);
+          tempParams = angular.copy(solution.httpParams);
+          delete tempParams[field.name];
+          return solution.queryString = $httpParamSerializerJQLike(tempParams);
+        } else {
+          return solution.queryString = $httpParamSerializerJQLike(solution.httpParams);
+        }
       };
     })(this);
 

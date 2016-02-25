@@ -15,8 +15,7 @@
       templateUrl: 'templates/identity.html',
       controller: 'IdentityController as vm'
     }).when('/reputation', {
-      templateUrl: 'templates/reputation.html',
-      controller: 'ReputationController as vm'
+      templateUrl: 'templates/reputation.html'
     }).when('/settings', {
       templateUrl: 'templates/settings.html',
       controller: 'SettingsController as vm'
